@@ -1,14 +1,20 @@
 package com.subastas.sistema_subastas.model;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import lombok.Data;
-
-@Data
-@Entity(name = "usuarios")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,4 +37,9 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario")
     private List<Puja> pujas;
+
+    @PrePersist
+    public void prePersist() {
+        this.fechaRegistro = LocalDate.now();
+    }
 }

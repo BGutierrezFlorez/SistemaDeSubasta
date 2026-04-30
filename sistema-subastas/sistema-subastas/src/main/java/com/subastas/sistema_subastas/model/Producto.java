@@ -1,7 +1,17 @@
 package com.subastas.sistema_subastas.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "productos")
 public class Producto {
@@ -29,6 +39,9 @@ public class Producto {
     @OneToOne(mappedBy = "producto")
     private Subasta subasta;
 
-    // getters y setters
+    @PrePersist
+    public void prePersist() {
+        this.fechaPublicacion = LocalDateTime.now();
+    }
 
 }

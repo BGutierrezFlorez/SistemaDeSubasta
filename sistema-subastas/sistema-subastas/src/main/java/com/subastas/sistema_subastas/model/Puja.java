@@ -26,5 +26,5 @@ public class Puja {
 
     private LocalDate fecha = LocalDate.now();
 
-    // getters y setters
+    
 }
